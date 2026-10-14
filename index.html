@@ -122,7 +122,13 @@
 
   /* Product photos: one treatment for every dish (crop, grade, vignette, logo double frame) */
   .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 20px; }
-  .card { display: flex; flex-direction: column; gap: 14px; }
+  .card { display: flex; flex-direction: column; gap: 12px; text-align: center; }
+  .card .slot { margin-top: auto; }
+  .card .slot > * { width: 100%; justify-content: space-between; }
+  .card .add { height: 42px; }
+  .card .qty { height: 42px; }
+  .card .qty button { width: 48px; height: 42px; }
+  .card .price { font-size: 20px; }
   .pic { background: var(--ink); aspect-ratio: 1; position: relative; display: grid; place-items: center; color: var(--paper); max-width: 100%; overflow: hidden; }
   .pic svg { width: 50%; stroke: currentColor; fill: none; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; opacity: .8; }
   .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--ink); filter: saturate(.9) contrast(1.08) brightness(1.03) sepia(.08); transform: scale(1.06); transition: transform .6s ease; }
@@ -131,7 +137,8 @@
   .pic::after { content: ''; position: absolute; inset: 8px; z-index: 2; border: 1px solid rgba(255,255,255,.75); box-shadow: inset 0 0 0 4px transparent, inset 0 0 0 5px rgba(255,255,255,.35); pointer-events: none; }
   .badge { position: absolute; top: 18px; left: 18px; z-index: 3; background: var(--paper); color: var(--ink); font-size: 10px; padding: 4px 8px; }
   .card-t { display: grid; gap: 3px; }
-  .card h3 { font-family: var(--serif); font-weight: 500; font-size: 14px; line-height: 1.35; }
+  .card h3 { font-family: var(--serif); font-weight: 500; font-size: 14px; line-height: 1.35; text-wrap: balance; }
+  .card-t { padding-top: 4px; }
   .desc { color: var(--muted); font-size: 13px; font-weight: 300; line-height: 1.45; }
   .meta { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
   .card .buy { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
@@ -223,9 +230,8 @@
     .list { grid-template-columns: 1fr; }
     .sets { grid-template-columns: 1fr; }
     .grid { grid-template-columns: 1fr 1fr; gap: 24px 12px; }
-    .card .buy { flex-wrap: wrap; }
-    .card .buy .price { font-size: 19px; }
-    .add { padding: 0 10px; }
+    .card .price { font-size: 18px; }
+    .card h3 { font-size: 13px; }
     .calc { grid-template-columns: 1fr auto; }
     .calc output { grid-column: 1 / -1; }
     .calc .link { grid-column: 1 / -1; justify-self: start; }
@@ -371,30 +377,46 @@ const MENU = [
       { id: 's2', name: 'სეტი „ლხინი“', guests: 25, pieces: 180, price: 590, tag: 'პოპულარული',
         list: ['მინი ხაჭაპურების ასორტი|40', 'მინი ლობიანი|20', 'სულგუნის კანაპე|30', 'ბადრიჯნის რულეტი|30', 'მინი მწვადი|30', 'საცივის ტარტალეტი|15', 'ჩურჩხელა და გოზინაყი|15'] },
     ] },
-  { id: 'canape', name: 'კანაპე და ტარტალეტი', kind: 'pieces', min: 12, step: 6,
+  { id: 'canape', name: 'კანაპე', kind: 'pieces', min: 12, step: 6,
     items: [
-      { id: 'cn1', name: 'სულგუნი და ჩერი პომიდორი', desc: 'რეჰანით', meta: '30 გ', price: 2.5, icon: 'f7', img: IMG('Sulguni Georgian cheese.jpg') },
-      { id: 'cn2', name: 'ბადრიჯნის რულეტი', desc: 'ნიგვზის პასტა, ბროწეული', meta: '40 გ', price: 3, icon: 'f4', img: IMG('Badrijani (cropped).jpg'), tag: 'ჰიტი' },
-      { id: 'cn3', name: 'ფხალის ტარტალეტი', desc: 'ისპანახი, ნიგოზი', meta: '35 გ', price: 3, icon: 'f5', img: IMG('Spinach pkhali.jpg') },
-      { id: 'cn4', name: 'საცივის ტარტალეტი', desc: 'ქათამი, ნიგვზის სოუსი', meta: '40 გ', price: 4, icon: 'f8', img: IMG('Satsivi (2).jpg') },
-      { id: 'cn5', name: 'მინი მწვადი', desc: 'შამფურზე, ტყემლით', meta: '50 გ', price: 5, icon: 'f6', img: IMG('Mtsvadi.jpg') },
-      { id: 'cn6', name: 'ჩახოხბილის კანაპე', desc: 'კრუტონზე', meta: '35 გ', price: 3.5, icon: 'h7', img: IMG('Chakhokhbili Closeup.jpg') },
+      { id: 'cn1', name: 'სულგუნი და ჩერი პომიდორი', desc: 'რეჰანით', price: 2.5, icon: 'f7', img: IMG('Sulguni Georgian cheese.jpg') },
+      { id: 'cn2', name: 'ბადრიჯნის რულეტი', desc: 'ნიგვზით, ბროწეულით', price: 3, icon: 'f4', img: IMG('Badrijani (cropped).jpg'), tag: 'ჰიტი' },
+      { id: 'cn3', name: 'ფხალის ტარტალეტი', desc: 'ისპანახი, ნიგოზი', price: 3, icon: 'f5', img: IMG('Spinach pkhali.jpg') },
+      { id: 'cn4', name: 'საცივის ტარტალეტი', desc: 'ქათამი, ნიგვზის სოუსი', price: 4, icon: 'f8', img: IMG('Satsivi (2).jpg') },
+      { id: 'cn6', name: 'ჩახოხბილის კრუტონი', desc: 'ქათამი, პომიდორი', price: 3.5, icon: 'h7', img: IMG('Chakhokhbili Closeup.jpg') },
+      { id: 'cn7', name: 'გუდის ყველი და ნიგოზი', desc: 'თაფლით', price: 3.2, icon: 'c5', img: IMG('Sulguni.jpg') },
     ] },
-  { id: 'mini', name: 'მინი ცომეული', kind: 'pieces', min: 10, step: 5,
+  { id: 'skewer', name: 'შამფურზე', kind: 'pieces', min: 10, step: 5,
     items: [
-      { id: 'm1', name: 'მინი აჭარული', desc: 'სულგუნი, მწყერის კვერცხი', meta: '60 გ', price: 4.5, icon: 'f1', img: IMG('Adjaruli Khachapuri (48).jpg'), tag: 'ჰიტი' },
-      { id: 'm2', name: 'მინი იმერული', desc: 'იმერული ყველი', meta: '50 გ', price: 3, icon: 'f2', img: IMG('Georgian Khachapuri cheese bread.jpg') },
-      { id: 'm3', name: 'მინი მეგრული', desc: 'ორმაგი სულგუნი', meta: '55 გ', price: 3.5, icon: 'f3', img: IMG('Megruli Chatschapuri.jpg') },
-      { id: 'm4', name: 'მინი ლობიანი', desc: 'რაჭული, ლორით', meta: '50 გ', price: 2.8, icon: 'f9', img: IMG('Lobiani - bean-filled bread.jpg') },
-      { id: 'm5', name: 'მინი კუბდარი', desc: 'ხორცი, სვანური მარილი', meta: '60 გ', price: 4, icon: 'k7', img: IMG('Kubdari meat pastry.jpg') },
-      { id: 'm6', name: 'მინი პენოვანი', desc: 'ფენოვანი ცომი, ყველი', meta: '45 გ', price: 3, icon: 'k4', img: IMG('Old Tbilisi, Georgian khachapuri, Georgia.jpg') },
+      { id: 'sk1', name: 'ღორის მწვადი', desc: 'ტყემლით', price: 5, icon: 'f6', img: IMG('Mtsvadi.jpg'), tag: 'ჰიტი' },
+      { id: 'sk2', name: 'ქათმის მწვადი', desc: 'აჯიკის მარინადით', price: 4.2, icon: 'f6', img: IMG('Ghoris Mtsvadi (ღორის მწვადი).JPG') },
+      { id: 'sk3', name: 'მინი ქაბაბი', desc: 'საქონლის ხორცი, ქინძი', price: 4.5, icon: 'h3' },
+      { id: 'sk4', name: 'ბოსტნეულის შამფური', desc: 'ბადრიჯანი, წიწაკა, სოკო', price: 3.5, icon: 'h3' },
+      { id: 'sk5', name: 'სოკო სულგუნით', desc: 'კეცზე შემწვარი', price: 3.8, icon: 'h2' },
+    ] },
+  { id: 'mini', name: 'ცომეული', kind: 'pieces', min: 10, step: 5,
+    items: [
+      { id: 'm1', name: 'მინი აჭარული', desc: 'სულგუნი, მწყერის კვერცხი', price: 4.5, icon: 'f1', img: IMG('Adjaruli Khachapuri (48).jpg'), tag: 'ჰიტი' },
+      { id: 'm2', name: 'მინი იმერული', desc: 'იმერული ყველი', price: 3, icon: 'f2', img: IMG('Georgian Khachapuri cheese bread.jpg') },
+      { id: 'm3', name: 'მინი მეგრული', desc: 'ორმაგი სულგუნი', price: 3.5, icon: 'f3', img: IMG('Megruli Chatschapuri.jpg') },
+      { id: 'm4', name: 'მინი ლობიანი', desc: 'რაჭული, ლორით', price: 2.8, icon: 'f9', img: IMG('Lobiani - bean-filled bread.jpg') },
+      { id: 'm5', name: 'მინი კუბდარი', desc: 'ხორცი, სვანური მარილი', price: 4, icon: 'k7', img: IMG('Kubdari meat pastry.jpg') },
+      { id: 'm6', name: 'მინი პენოვანი', desc: 'ფენოვანი ცომი, ყველი', price: 3, icon: 'k4', img: IMG('Old Tbilisi, Georgian khachapuri, Georgia.jpg') },
+    ] },
+  { id: 'pkhali', name: 'ფხალის ბურთულები', kind: 'pieces', min: 10, step: 5,
+    items: [
+      { id: 'p1', name: 'ისპანახის ფხალი', desc: 'ნიგოზი, ბროწეული', price: 2.2, icon: 'c2', img: IMG('Spinach pkhali.jpg') },
+      { id: 'p2', name: 'ჭარხლის ფხალი', desc: 'ნიგოზი, ქინძი', price: 2.2, icon: 'c2', img: IMG('Pkhali, Badrijani and Ajika.jpg') },
+      { id: 'p3', name: 'ლობიოს ფხალი', desc: 'წითელი ლობიო, ნიგოზი', price: 2, icon: 'c2' },
+      { id: 'p4', name: 'ჯონჯოლის ფხალი', desc: 'ნიგოზი, ხახვი', price: 2.4, icon: 'c6', img: IMG('Jonjoli bladdernut flower pickles.jpg') },
     ] },
   { id: 'sweet', name: 'მინი დესერტი', kind: 'pieces', min: 10, step: 5,
     items: [
-      { id: 'd1', name: 'მინი ჩურჩხელა', desc: 'კახური, ნიგვზით', meta: '25 გ', price: 2, icon: 'f10', img: IMG('Churchkhela (4).jpg') },
-      { id: 'd2', name: 'გოზინაყი', desc: 'ნიგოზი, თაფლი', meta: '20 გ', price: 2, icon: 'd2', img: IMG('Gozinaki with hazelnuts.jpg') },
-      { id: 'd3', name: 'ფელამუში ჭიქაში', desc: 'ყურძნის წვენი, ნიგოზი', meta: '80 გ', price: 3.5, icon: 'd3', img: IMG('Pelamushi.jpg') },
-      { id: 'd4', name: 'თაფლის ნამცხვარი', desc: 'არაჟნის კრემი', meta: '50 გ', price: 3, icon: 'd5', img: IMG('Medovik.jpg') },
+      { id: 'd1', name: 'მინი ჩურჩხელა', desc: 'კახური, ნიგვზით', price: 2, icon: 'f10', img: IMG('Churchkhela (4).jpg') },
+      { id: 'd2', name: 'გოზინაყი', desc: 'ნიგოზი, თაფლი', price: 2, icon: 'd2', img: IMG('Gozinaki with hazelnuts.jpg') },
+      { id: 'd3', name: 'ფელამუში ჭიქაში', desc: 'ყურძნის წვენი, ნიგოზი', price: 3.5, icon: 'd3', img: IMG('Pelamushi.jpg') },
+      { id: 'd4', name: 'თაფლის ნამცხვარი', desc: 'არაჟნის კრემი', price: 3, icon: 'd5', img: IMG('Medovik.jpg') },
+      { id: 'd5', name: 'მინი ნაზუქი', desc: 'დარიჩინი, ქიშმიში', price: 2.5, icon: 'd4' },
     ] },
   { id: 'khachapuri', name: 'ხაჭაპური', kind: 'list',
     items: [
@@ -446,10 +468,10 @@ const PIECE_AVG = 3.4;                           // average piece price, for the
 function control(id) {
   const q = cart.get(id) || 0, it = byId[id];
   return q ? `<div class="qty"><button data-d="-1" data-id="${id}" aria-label="ნაკლები">−</button><span>${q}</span><button data-d="1" data-id="${id}" aria-label="მეტი">+</button></div>`
-           : `<button class="add" data-d="1" data-id="${id}">${it.min > 1 ? `+ ${it.min} ც.` : 'დამატება'}</button>`;
+           : `<button class="add" data-d="1" data-id="${id}">${it.min > 1 ? `${it.min} ცალი` : 'დამატება'}</button>`;
 }
-// Photo when it loads; the dish icon stays underneath as a fallback
-const pic = (i, cls = '') => `<div class="pic ${cls}"><svg viewBox="0 0 100 70" aria-hidden="true"><use href="#i-${i.icon}"/></svg>${i.img ? `<img src="${i.img}" alt="${i.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}${!cls && i.tag ? `<span class="badge mt">${i.tag}</span>` : ''}</div>`;
+// Own studio photo (photos/<id>.jpg) first, then the Commons photo, then the dish icon underneath
+const pic = (i, cls = '') => `<div class="pic ${cls}"><svg viewBox="0 0 100 70" aria-hidden="true"><use href="#i-${i.icon}"/></svg><img src="photos/${i.id}.jpg" data-alt="${i.img || ''}" alt="${i.name}" loading="lazy" referrerpolicy="no-referrer" onerror="if (this.dataset.alt) { this.src = this.dataset.alt; this.dataset.alt = ''; } else this.remove()">${!cls && i.tag ? `<span class="badge mt">${i.tag}</span>` : ''}</div>`;
 
 function section(c) {
   const head = `<div class="cat-head"><h2 class="mt">${c.name}</h2>${c.kind === 'pieces' ? `<p class="minline">მინიმუმ ${c.min} ცალი თითო სახეობაზე</p>` : ''}</div>`;
@@ -476,7 +498,8 @@ function section(c) {
       <div class="grid">${c.items.map(i => `
         <article class="card">${pic(i)}
           <div class="card-t"><h3 class="mt">${i.name}</h3><div class="desc">${i.desc}</div></div>
-          <div class="buy"><div class="price">${gel(i.price)}<small> / ც.</small></div><div data-slot="${i.id}">${control(i.id)}</div></div>
+          <div class="price">${gel(i.price)}<small> / ცალი</small></div>
+          <div class="slot" data-slot="${i.id}">${control(i.id)}</div>
         </article>`).join('')}
       </div>
     </section>`;
