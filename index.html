@@ -46,9 +46,6 @@
   .logo::after { inset: 6px; border-width: .6px; }
   .logo b { position: absolute; inset: 21px 0 auto; text-align: center; font: 400 15px/1 var(--latin); letter-spacing: .5px; }
   .logo i { position: absolute; right: 12px; top: 39px; font: normal 300 5.5px/1 var(--sans); }
-  .brand { display: grid; gap: 2px; }
-  .brand strong { font-family: var(--serif); font-weight: 500; font-size: 15px; }
-  .brand > span { font-size: 12px; color: var(--muted); }
   .cart-btn { margin-left: auto; display: flex; align-items: center; gap: 10px; background: var(--ink); color: var(--paper); border: 0; padding: 11px 16px; font-size: 14px; }
   .cart-btn .n { background: var(--paper); color: var(--ink); min-width: 22px; height: 22px; border-radius: 11px; display: grid; place-items: center; font-size: 12px; font-weight: 600; padding: 0 6px; font-variant-numeric: tabular-nums; }
   .tabs { display: flex; gap: 28px; overflow-x: auto; scrollbar-width: none; }
@@ -80,7 +77,6 @@
   .stat:last-child { border: 0; margin: 0; padding-right: 0; }
   .stat b { font: 400 34px/1 var(--latin); font-variant-numeric: tabular-nums; }
   .stat span { font-size: 12px; color: var(--on-ink-muted); }
-  .painting { font-size: 11px; color: rgba(255,255,255,.6); text-align: right; }
   @keyframes drift { from { transform: scale(1.04) translateX(0); } to { transform: scale(1.1) translateX(-2%); } }
 
   /* ---------- Sections ---------- */
@@ -123,32 +119,36 @@
   .calc output b { color: var(--ink); font: 500 20px/1 var(--latin); }
   .link { border: 0; background: none; font-size: 14px; font-weight: 500; text-decoration: underline; text-underline-offset: 4px; white-space: nowrap; }
 
-  .sub { font-family: var(--serif); font-weight: 500; font-size: 15px; margin: 40px 0 18px; }
 
-  /* Furshet pieces: compact cards */
-  .grid { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 16px; }
-  .card { display: flex; flex-direction: column; gap: 12px; }
+  /* Product photos: one treatment for every dish (crop, grade, vignette, logo double frame) */
+  .grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 32px 20px; }
+  .card { display: flex; flex-direction: column; gap: 14px; }
   .pic { background: var(--ink); aspect-ratio: 1; position: relative; display: grid; place-items: center; color: var(--paper); max-width: 100%; overflow: hidden; }
-  .pic::after { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(255,255,255,.45); pointer-events: none; }
-  .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--ink); }
-  .pic::after { z-index: 1; }
-  .pic svg { width: 58%; stroke: currentColor; fill: none; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
-  .badge { position: absolute; top: 12px; left: 12px; background: var(--paper); color: var(--ink); font-size: 10px; font-weight: 600; padding: 3px 7px; z-index: 1; }
-  .card h3 { font-family: var(--serif); font-weight: 500; font-size: 15px; line-height: 1.3; }
+  .pic svg { width: 50%; stroke: currentColor; fill: none; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; opacity: .8; }
+  .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--ink); filter: saturate(.9) contrast(1.08) brightness(1.03) sepia(.08); transform: scale(1.06); transition: transform .6s ease; }
+  .card:hover .pic img { transform: scale(1.12); }
+  .pic::before { content: ''; position: absolute; inset: 0; z-index: 1; background: radial-gradient(ellipse at 50% 45%, transparent 50%, rgba(11,11,11,.38) 100%); pointer-events: none; }
+  .pic::after { content: ''; position: absolute; inset: 8px; z-index: 2; border: 1px solid rgba(255,255,255,.75); box-shadow: inset 0 0 0 4px transparent, inset 0 0 0 5px rgba(255,255,255,.35); pointer-events: none; }
+  .badge { position: absolute; top: 18px; left: 18px; z-index: 3; background: var(--paper); color: var(--ink); font-size: 10px; padding: 4px 8px; }
+  .card-t { display: grid; gap: 3px; }
+  .card h3 { font-family: var(--serif); font-weight: 500; font-size: 14px; line-height: 1.35; }
   .desc { color: var(--muted); font-size: 13px; font-weight: 300; line-height: 1.45; }
   .meta { font-size: 12px; color: var(--muted); font-variant-numeric: tabular-nums; }
   .card .buy { margin-top: auto; display: flex; align-items: center; justify-content: space-between; gap: 8px; }
   .price { font: 400 22px/1 var(--latin); font-variant-numeric: tabular-nums; white-space: nowrap; }
+  .price small { font: 400 12px var(--sans); color: var(--muted); }
+  .minline { font-size: 13px; color: var(--ink); border: 1px solid var(--ink); padding: 6px 12px; }
+  .minnote { font-size: 12px; color: var(--muted); text-align: center; }
+  .minnote:empty { display: none; }
 
-  /* Main menu: classic list */
+  /* Portions: classic list with photo thumbnails */
   .list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 56px; }
-  .row { display: grid; grid-template-columns: 72px minmax(0, 1fr) auto; gap: 16px; align-items: center; padding-block: 18px; border-bottom: 1px solid var(--line); }
-  .row .pic { aspect-ratio: 1; width: 72px; }
-  .row .pic::after { inset: 4px; }
-  .row .pic svg { width: 66%; stroke-width: 1.8; }
-  .row .badge { position: static; display: inline-block; margin-left: 8px; background: var(--ink); color: var(--paper); vertical-align: 2px; }
-  .row h3 { font-family: var(--serif); font-weight: 500; font-size: 16px; line-height: 1.3; }
-  .row .desc { margin-top: 2px; }
+  .row { display: grid; grid-template-columns: 96px minmax(0, 1fr) auto; gap: 18px; align-items: center; padding-block: 16px; border-bottom: 1px solid var(--line); }
+  .row .pic { width: 96px; }
+  .row .pic::after { inset: 5px; box-shadow: none; }
+  .row .pic svg { width: 62%; stroke-width: 1.8; }
+  .row h3 { font-family: var(--serif); font-weight: 500; font-size: 15px; line-height: 1.3; }
+  .row-t { display: grid; gap: 4px; min-width: 0; }
   .row .right { display: grid; justify-items: end; gap: 8px; }
 
   /* Buttons: add + stepper */
@@ -167,8 +167,8 @@
   .cartbar { position: fixed; left: 0; right: 0; bottom: 0; z-index: 30; background: var(--ink); color: var(--paper); transform: translateY(100%); transition: transform .3s ease; padding-bottom: env(safe-area-inset-bottom, 0px); }
   .cartbar.on { transform: none; }
   .cartbar .wrap { display: flex; align-items: center; gap: 16px; padding-block: 14px; }
-  .cartbar .info { font-size: 14px; color: var(--on-ink-muted); }
-  .cartbar .info b { color: var(--paper); font: 500 22px/1 var(--latin); margin-left: 6px; font-variant-numeric: tabular-nums; }
+  .cartbar .info { display: grid; gap: 4px; font-size: 12px; color: var(--on-ink-muted); }
+  .cartbar .info b { color: var(--paper); font: 500 24px/1 var(--latin); font-variant-numeric: tabular-nums; }
   .cartbar .btn { margin-left: auto; }
 
   /* ---------- Cart drawer ---------- */
@@ -197,7 +197,7 @@
   .order { background: var(--ink); color: var(--paper); border: 0; padding: 15px; font-size: 15px; font-weight: 500; }
   .order:disabled { opacity: .35; cursor: not-allowed; }
   .note { font-size: 11px; color: var(--muted); text-align: center; }
-  .toast { position: fixed; left: 50%; top: calc(var(--head-h) + 16px + env(safe-area-inset-top, 0px)); transform: translate(-50%, -12px); background: var(--ink); color: var(--paper); padding: 12px 20px; font-size: 14px; z-index: 50; transition: transform .25s, opacity .25s; opacity: 0; pointer-events: none; max-width: calc(100% - 32px); }
+  .toast { position: fixed; left: 50%; bottom: calc(96px + env(safe-area-inset-bottom, 0px)); transform: translate(-50%, 12px); background: var(--ink); color: var(--paper); padding: 12px 20px; font-size: 14px; z-index: 50; transition: transform .25s, opacity .25s; opacity: 0; pointer-events: none; max-width: calc(100% - 32px); }
   .toast.show { transform: translate(-50%, 0); opacity: 1; }
 
   footer { background: var(--ink); color: var(--paper); }
@@ -207,10 +207,10 @@
   .credit a { color: inherit; }
   .foot .nane { color: var(--paper); font: 400 26px/1 var(--latin); letter-spacing: 2px; margin-bottom: 6px; }
 
-  @media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sets { grid-template-columns: 1fr 1fr; } }
+  @media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sets { grid-template-columns: 1fr 1fr; } .list { column-gap: 32px; } }
+  @media (max-width: 980px) { .list { grid-template-columns: 1fr; } }
   @media (max-width: 860px) {
     :root { --gutter: 16px; --head-h: 112px; }
-    .brand { display: none; }
     .logo { width: 54px; height: 54px; }
     .logo b { top: 17px; font-size: 13px; }
     .logo i { top: 33px; right: 10px; font-size: 4.8px; }
@@ -220,16 +220,19 @@
     .hero::before { background: linear-gradient(0deg, rgba(11,11,11,.95) 0%, rgba(11,11,11,.8) 55%, rgba(11,11,11,.55) 100%); }
     .stat { padding-right: 16px; margin-right: 16px; }
     .stat b { font-size: 26px; }
-    .painting { text-align: left; }
     .list { grid-template-columns: 1fr; }
     .sets { grid-template-columns: 1fr; }
-    .grid { grid-template-columns: 1fr 1fr; gap: 20px 14px; }
+    .grid { grid-template-columns: 1fr 1fr; gap: 24px 12px; }
+    .card .buy { flex-wrap: wrap; }
+    .card .buy .price { font-size: 19px; }
+    .add { padding: 0 10px; }
     .calc { grid-template-columns: 1fr auto; }
     .calc output { grid-column: 1 / -1; }
     .calc .link { grid-column: 1 / -1; justify-self: start; }
     .foot { grid-template-columns: 1fr 1fr; }
-    .row { grid-template-columns: 64px minmax(0, 1fr) auto; gap: 14px; }
-    .row .pic { width: 64px; }
+    .row { grid-template-columns: 72px minmax(0, 1fr) auto; gap: 12px; }
+    .row .pic { width: 72px; }
+    .row .price { font-size: 19px; }
   }
   @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
 </style>
@@ -287,32 +290,30 @@
 <header>
   <div class="wrap bar">
     <a class="logo" href="#top" aria-label="NANE"><b>NANE</b><i>Since 2026</i></a>
-    <div class="brand"><strong class="mt">ქართული ფურშეტი და კეიტერინგი</strong><span>თბილისი · შეკვეთა 24 საათით ადრე · მიწოდება 50 ₾-დან უფასოა</span></div>
     <button class="cart-btn" id="openCart" aria-label="კალათის გახსნა">კალათა <span class="n" id="count">0</span></button>
   </div>
   <nav class="wrap tabs" id="tabs" aria-label="მენიუს კატეგორიები"></nav>
 </header>
 
 <section class="hero" id="top">
-  <img class="hero-bg" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pirosmani._Family_party.jpg?width=1800" alt="" referrerpolicy="no-referrer" onerror="this.remove(); document.querySelector('.painting')?.remove()">
+  <img class="hero-bg" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pirosmani._Family_party.jpg?width=1800" alt="" referrerpolicy="no-referrer" onerror="this.remove()">
   <div class="hero-frame" aria-hidden="true"></div>
   <div class="wrap hero-in">
     <div class="hero-copy">
-      <div class="eyebrow mt">ქართული სამზარეულო · Since 2026</div>
-      <h1 class="mt">ქართული სუფრა ფურშეტის ფორმატში</h1>
-      <p>მინი ხაჭაპურები, ფხალეული, მწვადი შამფურზე და ჩურჩხელა. შეუკვეთე ცალობით ან მზა სეტით ოფისისთვის, დაბადების დღისთვის ან დიდი ღონისძიებისთვის.</p>
+      <div class="eyebrow mt">Since 2026</div>
+      <h1 class="mt">ქართული ფურშეტი</h1>
+      <p>კანაპე, მინი ცომეული და ქართული სუფრა თქვენი ღონისძიებისთვის.</p>
       <div class="cta">
-        <a class="btn" href="#furshet">ფურშეტის სეტები</a>
-        <a class="btn ghost" href="#khachapuri">სრული მენიუ</a>
+        <a class="btn" href="#sets">სეტები</a>
+        <a class="btn ghost" href="#canape">კანაპე</a>
       </div>
     </div>
     <div class="hero-foot">
       <div class="stats">
-        <div class="stat"><b>10-200</b><span>სტუმარი ერთ შეკვეთაზე</span></div>
-        <div class="stat"><b>6-8</b><span>ცალი ერთ სტუმარზე</span></div>
-        <div class="stat"><b>24 სთ</b><span>წინასწარი შეკვეთა</span></div>
+        <div class="stat"><b>150 ₾</b><span>მინიმალური შეკვეთა</span></div>
+        <div class="stat"><b>24 სთ</b><span>წინასწარ შეკვეთა</span></div>
+        <div class="stat"><b>10-200</b><span>სტუმარი</span></div>
       </div>
-      <div class="painting">ნიკო ფიროსმანი, „ოჯახური ქეიფი“</div>
     </div>
   </div>
 </section>
@@ -325,14 +326,14 @@
     <div><h4 class="mt">მისამართი</h4>თბილისი</div>
     <div><h4 class="mt">სამუშაო საათები</h4>ყოველდღე 09:00-დან 22:00-მდე</div>
     <div><h4 class="mt">კონტაქტი</h4>+995 5XX XX XX XX<br>order@nane.ge</div>
-    <p class="credit">ფოტოები: <a href="https://commons.wikimedia.org/wiki/Category:Cuisine_of_Georgia_(country)" target="_blank" rel="noopener">Wikimedia Commons</a>, ავტორების CC BY / CC BY-SA ლიცენზიით. სატესტო ვერსია.</p>
+    <p class="credit">ფოტოები: <a href="https://commons.wikimedia.org/wiki/Category:Cuisine_of_Georgia_(country)" target="_blank" rel="noopener">Wikimedia Commons</a>, CC BY / CC BY-SA.</p>
   </div>
 </footer>
 
 <div class="cartbar" id="cartbar">
   <div class="wrap">
-    <div class="info"><span id="barCount">0 პოზიცია</span><b id="barSum">0 ₾</b></div>
-    <button class="btn" id="barOpen">შეკვეთის გაფორმება</button>
+    <div class="info"><b id="barSum">0 ₾</b><span id="barCount"></span></div>
+    <button class="btn" id="barOpen">შეკვეთა</button>
   </div>
 </div>
 
@@ -349,149 +350,157 @@
       <input placeholder="სტუმრების რაოდენობა" id="fGuests" inputmode="numeric">
       <input class="full" placeholder="მისამართი" id="fAddr" autocomplete="street-address">
     </form>
+    <div class="minnote" id="minNote"></div>
     <button class="order" id="order" disabled>შეკვეთის გაგზავნა</button>
-    <div class="note">სატესტო ფორმაა, შეკვეთა არსად იგზავნება</div>
   </div>
 </aside>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
+const IMG = f => 'https://commons.wikimedia.org/wiki/Special:FilePath/' + encodeURIComponent(f.replace(/ /g, '_')) + '?width=640';
+const MIN_ORDER = 150;                           // minimum order total, ₾
+
+// kind: 'sets' | 'pieces' (sold by the piece, min + step) | 'list' (portions)
 const MENU = [
-  { id: 'furshet', name: 'ფურშეტი', note: 'ცალობით შეკვეთისას მინიმუმ 10 ცალი თითოეული. ან აირჩიე მზა სეტი.',
-    sets: [
-      { id: 's1', name: 'სეტი „სუფრა“', meta: '10 სტუმარი · 70 ცალი', price: 240,
-        items: ['მინი აჭარული ხაჭაპური|10', 'მინი იმერული|10', 'ბადრიჯანი ნიგვზით|15', 'ფხალი ტარტალეტში|15', 'მწვადი შამფურზე|10', 'მინი ჩურჩხელა|10'] },
-      { id: 's2', name: 'სეტი „ლხინი“', meta: '25 სტუმარი · 180 ცალი', price: 590, tag: 'პოპულარული',
-        items: ['მინი ხაჭაპურების ასორტი|40', 'ლობიანი მინი|20', 'სულგუნის კანაპე|30', 'ბადრიჯანი ნიგვზით|30', 'მწვადი შამფურზე|30', 'საცივი ტარტალეტში|15', 'ჩურჩხელა და გოზინაყი|15'] },
-      { id: 's3', name: 'სეტი „შეხვედრა“', meta: '15 სტუმარი · 90 ცალი', price: 285,
-        items: ['პენოვანი მინი|30', 'ლობიანი მინი|15', 'ყველის კანაპე|20', 'ფელამუში ჭიქაში|15', 'ნაზუქი|10'] },
-    ],
+  { id: 'sets', name: 'ფურშეტის სეტები', kind: 'sets',
     items: [
-      { id: 'f1', name: 'მინი აჭარული ხაჭაპური', desc: 'სულგუნი, იმერული ყველი, მწყერის კვერცხი', meta: '1 ცალი · 60 გ', price: 4.5, icon: 'f1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Adjaruli_Khachapuri_%2848%29.jpg?width=640', tag: 'ჰიტი' },
-      { id: 'f2', name: 'მინი იმერული ხაჭაპური', desc: 'იმერული ყველი, საფუვრიანი ცომი', meta: '1 ცალი · 50 გ', price: 3, icon: 'f2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Georgian_Khachapuri_cheese_bread.jpg?width=640' },
-      { id: 'f3', name: 'მინი მეგრული', desc: 'ორმაგი სულგუნი ზემოდან', meta: '1 ცალი · 55 გ', price: 3.5, icon: 'f3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Megruli_Chatschapuri.jpg?width=640' },
-      { id: 'f4', name: 'ბადრიჯანი ნიგვზით', desc: 'რულეტი, ნიგვზის პასტა, ბროწეული', meta: '1 ცალი · 40 გ', price: 3, icon: 'f4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Badrijani_%28cropped%29.jpg?width=640' },
-      { id: 'f5', name: 'ფხალი ტარტალეტში', desc: 'ისპანახი, ჭარხალი, ნიგვზი', meta: '1 ცალი · 35 გ', price: 3, icon: 'f5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Spinach_pkhali.jpg?width=640' },
-      { id: 'f6', name: 'მწვადი შამფურზე', desc: 'ღორის კისერი, ხახვი, ტყემალი', meta: '1 ცალი · 50 გ', price: 5, icon: 'f6', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Mtsvadi.jpg?width=640' },
-      { id: 'f7', name: 'სულგუნის კანაპე', desc: 'სულგუნი, ჩერი პომიდორი, რეჰანი', meta: '1 ცალი · 30 გ', price: 2.5, icon: 'f7', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sulguni_Georgian_cheese.jpg?width=640' },
-      { id: 'f8', name: 'საცივი ტარტალეტში', desc: 'ქათამი, ნიგვზის სოუსი', meta: '1 ცალი · 40 გ', price: 4, icon: 'f8', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Satsivi_%282%29.jpg?width=640' },
-      { id: 'f9', name: 'მინი ლობიანი', desc: 'რაჭული, ლორით ან უხორცო', meta: '1 ცალი · 50 გ', price: 2.8, icon: 'f9', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lobiani_-_bean-filled_bread.jpg?width=640' },
-      { id: 'f10', name: 'მინი ჩურჩხელა', desc: 'ყურძნის თათარა, ნიგოზი', meta: '1 ცალი · 25 გ', price: 2, icon: 'f10', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Churchkhela_%284%29.jpg?width=640' },
+      { id: 's1', name: 'სეტი „სუფრა“', guests: 10, pieces: 70, price: 240,
+        list: ['მინი აჭარული|10', 'მინი იმერული|10', 'ბადრიჯნის რულეტი|15', 'ფხალის ტარტალეტი|15', 'მინი მწვადი|10', 'მინი ჩურჩხელა|10'] },
+      { id: 's3', name: 'სეტი „შეხვედრა“', guests: 15, pieces: 90, price: 285,
+        list: ['მინი პენოვანი|30', 'მინი ლობიანი|15', 'სულგუნის კანაპე|20', 'ფელამუში ჭიქაში|15', 'გოზინაყი|10'] },
+      { id: 's2', name: 'სეტი „ლხინი“', guests: 25, pieces: 180, price: 590, tag: 'პოპულარული',
+        list: ['მინი ხაჭაპურების ასორტი|40', 'მინი ლობიანი|20', 'სულგუნის კანაპე|30', 'ბადრიჯნის რულეტი|30', 'მინი მწვადი|30', 'საცივის ტარტალეტი|15', 'ჩურჩხელა და გოზინაყი|15'] },
     ] },
-  { id: 'khachapuri', name: 'ხაჭაპური და ცომეული', note: 'ცხვება შეკვეთისას. მთლიანი ზომა 2-4 ადამიანზე.',
+  { id: 'canape', name: 'კანაპე და ტარტალეტი', kind: 'pieces', min: 12, step: 6,
     items: [
-      { id: 'k1', name: 'აჭარული ხაჭაპური', desc: 'ნავის ფორმა, კარაქი, კვერცხი', meta: '450 გ', price: 20, icon: 'k1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Adjaruli_Khachapuri.jpg?width=640', tag: 'ჰიტი' },
-      { id: 'k2', name: 'იმერული ხაჭაპური', desc: 'კლასიკური, იმერული ყველი', meta: '600 გ · 8 ნაჭერი', price: 18, icon: 'k2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Khachapuri.jpg?width=640' },
-      { id: 'k3', name: 'მეგრული ხაჭაპური', desc: 'სულგუნი შიგნით და ზემოდან', meta: '700 გ · 8 ნაჭერი', price: 22, icon: 'k3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Megruli_Chatschapuri.jpg?width=640' },
-      { id: 'k4', name: 'პენოვანი', desc: 'ფენოვანი ცომი, იმერული ყველი', meta: '1 ცალი · 180 გ', price: 6, icon: 'k4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Old_Tbilisi%2C_Georgian_khachapuri%2C_Georgia.jpg?width=640' },
-      { id: 'k5', name: 'რაჭული ლობიანი', desc: 'ლობიო, ლორი, ხახვი', meta: '600 გ', price: 16, icon: 'k5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lobiani%2C_Restaurant_Aragvi.jpg?width=640' },
-      { id: 'k6', name: 'ხაბიზგინა', desc: 'ოსური, ყველი და კარტოფილი', meta: '600 გ', price: 18, icon: 'k6', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ossetian_cheese_pie_%28khabizgin%29.jpg?width=640' },
-      { id: 'k7', name: 'კუბდარი', desc: 'სვანური, ხორცი და სვანური მარილი', meta: '650 გ', price: 24, icon: 'k7', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kubdari.jpg?width=640' },
-      { id: 'k8', name: 'შოთი პური', desc: 'თონის პური', meta: '1 ცალი', price: 2, icon: 'k8', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Shoti_gorgian_bread.jpg?width=640' },
+      { id: 'cn1', name: 'სულგუნი და ჩერი პომიდორი', desc: 'რეჰანით', meta: '30 გ', price: 2.5, icon: 'f7', img: IMG('Sulguni Georgian cheese.jpg') },
+      { id: 'cn2', name: 'ბადრიჯნის რულეტი', desc: 'ნიგვზის პასტა, ბროწეული', meta: '40 გ', price: 3, icon: 'f4', img: IMG('Badrijani (cropped).jpg'), tag: 'ჰიტი' },
+      { id: 'cn3', name: 'ფხალის ტარტალეტი', desc: 'ისპანახი, ნიგოზი', meta: '35 გ', price: 3, icon: 'f5', img: IMG('Spinach pkhali.jpg') },
+      { id: 'cn4', name: 'საცივის ტარტალეტი', desc: 'ქათამი, ნიგვზის სოუსი', meta: '40 გ', price: 4, icon: 'f8', img: IMG('Satsivi (2).jpg') },
+      { id: 'cn5', name: 'მინი მწვადი', desc: 'შამფურზე, ტყემლით', meta: '50 გ', price: 5, icon: 'f6', img: IMG('Mtsvadi.jpg') },
+      { id: 'cn6', name: 'ჩახოხბილის კანაპე', desc: 'კრუტონზე', meta: '35 გ', price: 3.5, icon: 'h7', img: IMG('Chakhokhbili Closeup.jpg') },
     ] },
-  { id: 'hot', name: 'ცხელი კერძები',
-    note: 'მიეწოდება თერმოკონტეინერებით.',
+  { id: 'mini', name: 'მინი ცომეული', kind: 'pieces', min: 10, step: 5,
     items: [
-      { id: 'h1', name: 'ხინკალი ქალაქური', desc: 'ღორის და საქონლის ხორცი, მწვანილი', meta: '10 ცალი', price: 15, icon: 'h1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Khinkali.jpg?width=640', tag: 'ჰიტი' },
-      { id: 'h2', name: 'ხინკალი სოკოთი', desc: 'სოკო, ხახვი, კარაქი', meta: '10 ცალი', price: 15, icon: 'h2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Khinkali_%285%29.jpg?width=640' },
-      { id: 'h3', name: 'მწვადი ღორის', desc: 'ხახვი, ტყემალი, ლავაში', meta: '350 გ', price: 26, icon: 'h3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ghoris_Mtsvadi_%28%E1%83%A6%E1%83%9D%E1%83%A0%E1%83%98%E1%83%A1_%E1%83%9B%E1%83%AC%E1%83%95%E1%83%90%E1%83%93%E1%83%98%29.JPG?width=640' },
-      { id: 'h4', name: 'შქმერული', desc: 'ქათამი რძე-ნივრის სოუსში, კეცზე', meta: '500 გ', price: 30, icon: 'h4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Shkmeruli.jpg?width=640' },
-      { id: 'h5', name: 'ოჯახური', desc: 'ღორის ხორცი, შემწვარი კარტოფილი', meta: '450 გ', price: 24, icon: 'h5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ojakhuri.JPG?width=640' },
-      { id: 'h6', name: 'ჩაქაფული', desc: 'ხბოს ხორცი, ტყემალი, ტარხუნა', meta: '450 გ', price: 28, icon: 'h6', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Chakapuli.jpg?width=640' },
-      { id: 'h7', name: 'ჩახოხბილი', desc: 'ქათამი, პომიდორი, მწვანილი', meta: '450 გ', price: 22, icon: 'h7', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Chakhokhbili_Closeup.jpg?width=640' },
-      { id: 'h8', name: 'ლობიო ქოთანში', desc: 'მჭადით და მჟავეულით', meta: '400 გ', price: 14, icon: 'h8', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lobio_with_summer_savory_and_ajika.jpg?width=640' },
+      { id: 'm1', name: 'მინი აჭარული', desc: 'სულგუნი, მწყერის კვერცხი', meta: '60 გ', price: 4.5, icon: 'f1', img: IMG('Adjaruli Khachapuri (48).jpg'), tag: 'ჰიტი' },
+      { id: 'm2', name: 'მინი იმერული', desc: 'იმერული ყველი', meta: '50 გ', price: 3, icon: 'f2', img: IMG('Georgian Khachapuri cheese bread.jpg') },
+      { id: 'm3', name: 'მინი მეგრული', desc: 'ორმაგი სულგუნი', meta: '55 გ', price: 3.5, icon: 'f3', img: IMG('Megruli Chatschapuri.jpg') },
+      { id: 'm4', name: 'მინი ლობიანი', desc: 'რაჭული, ლორით', meta: '50 გ', price: 2.8, icon: 'f9', img: IMG('Lobiani - bean-filled bread.jpg') },
+      { id: 'm5', name: 'მინი კუბდარი', desc: 'ხორცი, სვანური მარილი', meta: '60 გ', price: 4, icon: 'k7', img: IMG('Kubdari meat pastry.jpg') },
+      { id: 'm6', name: 'მინი პენოვანი', desc: 'ფენოვანი ცომი, ყველი', meta: '45 გ', price: 3, icon: 'k4', img: IMG('Old Tbilisi, Georgian khachapuri, Georgia.jpg') },
     ] },
-  { id: 'cold', name: 'სალათები და ცივი კერძები',
+  { id: 'sweet', name: 'მინი დესერტი', kind: 'pieces', min: 10, step: 5,
     items: [
-      { id: 'c1', name: 'ქართული სალათი ნიგვზით', desc: 'კიტრი, პომიდორი, კახური ზეთი', meta: '350 გ', price: 15, icon: 'c1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tomato_cucumber_salad.jpg?width=640' },
-      { id: 'c2', name: 'ფხალეულის ასორტი', desc: 'ისპანახი, ჭარხალი, ჯონჯოლი, ბადრიჯანი', meta: '400 გ', price: 22, icon: 'c2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pkhali%2C_Badrijani_and_Ajika.jpg?width=640' },
-      { id: 'c3', name: 'ბადრიჯანი ნიგვზით', desc: '8 რულეტი, ბროწეული', meta: '320 გ', price: 18, icon: 'c3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Badrijani_%28cropped%29.jpg?width=640' },
-      { id: 'c4', name: 'საცივი', desc: 'ინდაური ნიგვზის სოუსში', meta: '400 გ', price: 28, icon: 'c4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Satsivi_%282%29.jpg?width=640' },
-      { id: 'c5', name: 'ქართული ყველის დაფა', desc: 'სულგუნი, იმერული, გუდა, ნადუღი', meta: '500 გ', price: 34, icon: 'c5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sulguni.jpg?width=640' },
-      { id: 'c6', name: 'მჟავეულის ასორტი', desc: 'ჯონჯოლი, მწნილი, ჯანჯაფილი', meta: '400 გ', price: 14, icon: 'c6', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jonjoli_bladdernut_flower_pickles.jpg?width=640' },
+      { id: 'd1', name: 'მინი ჩურჩხელა', desc: 'კახური, ნიგვზით', meta: '25 გ', price: 2, icon: 'f10', img: IMG('Churchkhela (4).jpg') },
+      { id: 'd2', name: 'გოზინაყი', desc: 'ნიგოზი, თაფლი', meta: '20 გ', price: 2, icon: 'd2', img: IMG('Gozinaki with hazelnuts.jpg') },
+      { id: 'd3', name: 'ფელამუში ჭიქაში', desc: 'ყურძნის წვენი, ნიგოზი', meta: '80 გ', price: 3.5, icon: 'd3', img: IMG('Pelamushi.jpg') },
+      { id: 'd4', name: 'თაფლის ნამცხვარი', desc: 'არაჟნის კრემი', meta: '50 გ', price: 3, icon: 'd5', img: IMG('Medovik.jpg') },
     ] },
-  { id: 'dessert', name: 'დესერტი',
+  { id: 'khachapuri', name: 'ხაჭაპური', kind: 'list',
     items: [
-      { id: 'd1', name: 'ჩურჩხელა კახური', desc: 'ნიგოზი, ყურძნის თათარა', meta: '1 ცალი · 120 გ', price: 6, icon: 'd1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Churchkhela.jpg?width=640' },
-      { id: 'd2', name: 'გოზინაყი', desc: 'ნიგოზი და თაფლი', meta: '200 გ', price: 12, icon: 'd2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Gozinaki_with_hazelnuts.jpg?width=640' },
-      { id: 'd3', name: 'ფელამუში', desc: 'ყურძნის წვენი, ნიგოზი', meta: '1 ჭიქა', price: 7, icon: 'd3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pelamushi.jpg?width=640' },
-      { id: 'd4', name: 'ნაზუქი', desc: 'ტკბილი პური, დარიჩინი', meta: '1 ცალი', price: 5, icon: 'd4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Traditional_georgian_bread_%28tonis_puri%29.jpg?width=640' },
-      { id: 'd5', name: 'თაფლის ნამცხვარი', desc: '„მედოკი“, არაჟნის კრემი', meta: '1 ნაჭერი', price: 8, icon: 'd5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Medovik.jpg?width=640' },
+      { id: 'k1', name: 'აჭარული ხაჭაპური', desc: 'კარაქი, კვერცხი', meta: '450 გ', price: 20, icon: 'k1', img: IMG('Adjaruli Khachapuri.jpg') },
+      { id: 'k2', name: 'იმერული ხაჭაპური', desc: 'იმერული ყველი', meta: '600 გ', price: 18, icon: 'k2', img: IMG('Khachapuri.jpg') },
+      { id: 'k3', name: 'მეგრული ხაჭაპური', desc: 'სულგუნი ზემოდან', meta: '700 გ', price: 22, icon: 'k3', img: IMG('Megruli Chatschapuri.jpg') },
+      { id: 'k5', name: 'რაჭული ლობიანი', desc: 'ლობიო, ლორი', meta: '600 გ', price: 16, icon: 'k5', img: IMG('Lobiani, Restaurant Aragvi.jpg') },
+      { id: 'k7', name: 'კუბდარი', desc: 'სვანური, ხორცით', meta: '650 გ', price: 24, icon: 'k7', img: IMG('Kubdari.jpg') },
+      { id: 'k6', name: 'ხაბიზგინა', desc: 'ყველი, კარტოფილი', meta: '600 გ', price: 18, icon: 'k6', img: IMG('Ossetian cheese pie (khabizgin).jpg') },
+      { id: 'k8', name: 'შოთი', desc: 'თონის პური', meta: '1 ც.', price: 2, icon: 'k8', img: IMG('Shoti gorgian bread.jpg') },
     ] },
-  { id: 'drinks', name: 'სასმელი',
+  { id: 'hot', name: 'ცხელი კერძები', kind: 'list',
     items: [
-      { id: 'w1', name: 'საფერავი', desc: 'მშრალი წითელი, კახეთი', meta: '0.75 ლ', price: 45, icon: 'w1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wine_bottle_of_Saperavi.jpg?width=640' },
-      { id: 'w2', name: 'რქაწითელი ქვევრის', desc: 'ქარვისფერი, მშრალი', meta: '0.75 ლ', price: 48, icon: 'w2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Qvevri_Mesashunawines.jpg?width=640' },
-      { id: 'w3', name: 'ქინძმარაული', desc: 'ნახევრად ტკბილი წითელი', meta: '0.75 ლ', price: 42, icon: 'w3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Saperavi.jpg?width=640' },
-      { id: 'w4', name: 'ლიმონათი', desc: 'ტარხუნა, მსხალი, ნაღები', meta: '0.5 ლ', price: 4, icon: 'w4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tbilisi%2C_Lagidze_lemonade%2C_Georgia.jpg?width=640' },
-      { id: 'w5', name: 'ბორჯომი', desc: 'მინერალური წყალი', meta: '0.5 ლ', price: 3.5, icon: 'w5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/0.5_GL_Borjomi_Glass_Bottle.jpg?width=640' },
-      { id: 'w6', name: 'ჭაჭა', desc: 'ყურძნის არაყი', meta: '0.5 ლ', price: 38, icon: 'w6', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Chacha.jpg?width=640' },
+      { id: 'h1', name: 'ხინკალი ქალაქური', desc: 'ღორის და საქონლის ხორცი', meta: '10 ც.', price: 15, icon: 'h1', img: IMG('Khinkali.jpg'), tag: 'ჰიტი' },
+      { id: 'h2', name: 'ხინკალი სოკოთი', desc: 'სოკო, კარაქი', meta: '10 ც.', price: 15, icon: 'h2', img: IMG('Khinkali (5).jpg') },
+      { id: 'h3', name: 'მწვადი', desc: 'ღორის კისერი, ხახვი', meta: '350 გ', price: 26, icon: 'h3', img: IMG('Ghoris Mtsvadi (ღორის მწვადი).JPG') },
+      { id: 'h4', name: 'შქმერული', desc: 'ქათამი, რძე, ნიორი', meta: '500 გ', price: 30, icon: 'h4', img: IMG('Shkmeruli.jpg') },
+      { id: 'h5', name: 'ოჯახური', desc: 'ღორის ხორცი, კარტოფილი', meta: '450 გ', price: 24, icon: 'h5', img: IMG('Ojakhuri.JPG') },
+      { id: 'h6', name: 'ჩაქაფული', desc: 'ხბო, ტარხუნა, ტყემალი', meta: '450 გ', price: 28, icon: 'h6', img: IMG('Chakapuli.jpg') },
+      { id: 'h7', name: 'ჩახოხბილი', desc: 'ქათამი, პომიდორი', meta: '450 გ', price: 22, icon: 'h7', img: IMG('Chakhokhbili Closeup.jpg') },
+      { id: 'h8', name: 'ლობიო ქოთანში', desc: 'მჭადით', meta: '400 გ', price: 14, icon: 'h8', img: IMG('Lobio with summer savory and ajika.jpg') },
+    ] },
+  { id: 'cold', name: 'ცივი კერძები', kind: 'list',
+    items: [
+      { id: 'c1', name: 'ქართული სალათი', desc: 'კიტრი, პომიდორი, ნიგოზი', meta: '350 გ', price: 15, icon: 'c1', img: IMG('Tomato cucumber salad.jpg') },
+      { id: 'c2', name: 'ფხალეულის ასორტი', desc: 'ისპანახი, ჭარხალი, ბადრიჯანი', meta: '400 გ', price: 22, icon: 'c2', img: IMG('Pkhali, Badrijani and Ajika.jpg') },
+      { id: 'c4', name: 'საცივი', desc: 'ინდაური, ნიგვზის სოუსი', meta: '400 გ', price: 28, icon: 'c4', img: IMG('Satsivi (2).jpg') },
+      { id: 'c5', name: 'ყველის დაფა', desc: 'სულგუნი, იმერული, გუდა', meta: '500 გ', price: 34, icon: 'c5', img: IMG('Sulguni.jpg') },
+      { id: 'c6', name: 'მჟავეული', desc: 'ჯონჯოლი, მწნილი', meta: '400 გ', price: 14, icon: 'c6', img: IMG('Jonjoli bladdernut flower pickles.jpg') },
+    ] },
+  { id: 'drinks', name: 'სასმელი', kind: 'list',
+    items: [
+      { id: 'w1', name: 'საფერავი', desc: 'მშრალი წითელი', meta: '0.75 ლ', price: 45, icon: 'w1', img: IMG('Wine bottle of Saperavi.jpg') },
+      { id: 'w2', name: 'რქაწითელი ქვევრის', desc: 'ქარვისფერი', meta: '0.75 ლ', price: 48, icon: 'w2', img: IMG('Qvevri Mesashunawines.jpg') },
+      { id: 'w3', name: 'ქინძმარაული', desc: 'ნახევრად ტკბილი', meta: '0.75 ლ', price: 42, icon: 'w3', img: IMG('Saperavi.jpg') },
+      { id: 'w4', name: 'ლიმონათი', desc: 'ტარხუნა, მსხალი, ნაღები', meta: '0.5 ლ', price: 4, icon: 'w4', img: IMG('Tbilisi, Lagidze lemonade, Georgia.jpg') },
+      { id: 'w5', name: 'ბორჯომი', desc: 'მინერალური წყალი', meta: '0.5 ლ', price: 3.5, icon: 'w5', img: IMG('0.5 GL Borjomi Glass Bottle.jpg') },
+      { id: 'w6', name: 'ჭაჭა', desc: 'ყურძნის არაყი', meta: '0.5 ლ', price: 38, icon: 'w6', img: IMG('Chacha.jpg') },
     ] },
 ];
 
-const cart = new Map();                         // id -> qty
+const cart = new Map();                          // id -> qty
 const byId = {};
-MENU.forEach(c => [...(c.sets || []), ...c.items].forEach(i => byId[i.id] = i));
+MENU.forEach(c => c.items.forEach(i => { byId[i.id] = i; i.min = c.min || 1; i.step = c.step || 1; i.kind = c.kind; }));
 const gel = n => (Math.round(n * 100) / 100).toLocaleString('en-US', { maximumFractionDigits: 2 }) + ' ₾';
 const $ = s => document.querySelector(s);
-const PIECE_AVG = 3.4;                          // average furshet piece price, for the estimate
+const PIECE_AVG = 3.4;                           // average piece price, for the guest estimate
 
 function control(id) {
-  const q = cart.get(id) || 0;
-  return q ? `<div class="qty"><button data-d="-1" data-id="${id}" aria-label="ერთით ნაკლები">−</button><span>${q}</span><button data-d="1" data-id="${id}" aria-label="ერთით მეტი">+</button></div>`
-           : `<button class="add" data-d="1" data-id="${id}">დამატება</button>`;
+  const q = cart.get(id) || 0, it = byId[id];
+  return q ? `<div class="qty"><button data-d="-1" data-id="${id}" aria-label="ნაკლები">−</button><span>${q}</span><button data-d="1" data-id="${id}" aria-label="მეტი">+</button></div>`
+           : `<button class="add" data-d="1" data-id="${id}">${it.min > 1 ? `+ ${it.min} ც.` : 'დამატება'}</button>`;
 }
-// Real photo when it loads; the dish icon stays underneath as a fallback
-const pic = (i, cls = '') => `<div class="pic ${cls}"><svg viewBox="0 0 100 70" aria-hidden="true"><use href="#i-${i.icon}"/></svg>${i.img ? `<img src="${i.img}" alt="${i.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}${cls ? '' : (i.tag ? `<span class="badge">${i.tag}</span>` : '')}</div>`;
+// Photo when it loads; the dish icon stays underneath as a fallback
+const pic = (i, cls = '') => `<div class="pic ${cls}"><svg viewBox="0 0 100 70" aria-hidden="true"><use href="#i-${i.icon}"/></svg>${i.img ? `<img src="${i.img}" alt="${i.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}${!cls && i.tag ? `<span class="badge mt">${i.tag}</span>` : ''}</div>`;
+
+function section(c) {
+  const head = `<div class="cat-head"><h2 class="mt">${c.name}</h2>${c.kind === 'pieces' ? `<p class="minline">მინიმუმ ${c.min} ცალი თითო სახეობაზე</p>` : ''}</div>`;
+  if (c.kind === 'sets') return `
+    <section class="cat" id="${c.id}">${head}
+      <div class="sets">${c.items.map(s => `
+        <article class="set${s.tag ? ' hl' : ''}">${s.tag ? `<span class="stamp mt">${s.tag}</span>` : ''}<div class="set-in">
+          <div class="top"><span class="guests">${s.guests}</span><span class="guests-l">სტუმარზე<br>${s.pieces} ცალი</span></div>
+          <h3 class="mt">${s.name}</h3>
+          <div class="orn"><i></i></div>
+          <ul>${s.list.map(x => { const [n, q] = x.split('|'); return `<li><span class="mt">${n}</span><span>${q} ც.</span></li>`; }).join('')}</ul>
+          <div class="buy"><div class="price">${gel(s.price)}<span class="per">${gel(s.price / s.guests)} სტუმარზე</span></div><div data-slot="${s.id}">${control(s.id)}</div></div>
+        </div></article>`).join('')}
+      </div>
+      <div class="calc">
+        <h4>რამდენი სტუმარი გყავს?</h4>
+        <div class="step"><button data-g="-5" aria-label="5-ით ნაკლები">−</button><input type="number" min="1" value="20" id="guests" aria-label="სტუმრების რაოდენობა"><button data-g="5" aria-label="5-ით მეტი">+</button></div>
+        <output id="calcOut"></output>
+        <button class="link" id="calcSet"></button>
+      </div>
+    </section>`;
+  if (c.kind === 'pieces') return `
+    <section class="cat" id="${c.id}">${head}
+      <div class="grid">${c.items.map(i => `
+        <article class="card">${pic(i)}
+          <div class="card-t"><h3 class="mt">${i.name}</h3><div class="desc">${i.desc}</div></div>
+          <div class="buy"><div class="price">${gel(i.price)}<small> / ც.</small></div><div data-slot="${i.id}">${control(i.id)}</div></div>
+        </article>`).join('')}
+      </div>
+    </section>`;
+  return `
+    <section class="cat" id="${c.id}">${head}
+      <div class="list">${c.items.map(i => `
+        <article class="row">${pic(i, 'sm')}
+          <div class="row-t"><h3 class="mt">${i.name}</h3><div class="desc">${i.desc} · ${i.meta}</div></div>
+          <div class="right"><div class="price">${gel(i.price)}</div><div data-slot="${i.id}">${control(i.id)}</div></div>
+        </article>`).join('')}
+      </div>
+    </section>`;
+}
 
 function render() {
   $('#tabs').innerHTML = MENU.map((c, i) => `<button class="tab mt" data-go="${c.id}" aria-current="${i === 0}">${c.name}</button>`).join('');
-  $('#menu').innerHTML = MENU.map(c => {
-    const head = `<div class="cat-head"><h2 class="mt">${c.name}</h2>${c.note ? `<p>${c.note}</p>` : ''}</div>`;
-    if (c.sets) return `
-      <section class="cat" id="${c.id}">${head}
-        <div class="sets">${[...c.sets].sort((a, b) => a.price - b.price).map(s => `
-          <article class="set${s.tag ? ' hl' : ''}">${s.tag ? `<span class="stamp mt">${s.tag}</span>` : ''}<div class="set-in">
-            <div class="top"><span class="guests">${parseInt(s.meta)}</span><span class="guests-l">სტუმარზე<br>${s.meta.split('· ')[1]}</span></div>
-            <h3 class="mt">${s.name}</h3>
-            <div class="orn"><i></i></div>
-            <ul>${s.items.map(x => { const [n, q] = x.split('|'); return `<li><span class="mt">${n}</span><span>${q} ც.</span></li>`; }).join('')}</ul>
-            <div class="buy"><div class="price">${gel(s.price)}<span class="per">${gel(s.price / parseInt(s.meta))} ერთ სტუმარზე</span></div><div data-slot="${s.id}">${control(s.id)}</div></div>
-          </div></article>`).join('')}
-        </div>
-        <div class="calc">
-          <h4>რამდენი სტუმარი გყავს?</h4>
-          <div class="step"><button data-g="-5" aria-label="5-ით ნაკლები">−</button><input type="number" min="1" value="20" id="guests" aria-label="სტუმრების რაოდენობა"><button data-g="5" aria-label="5-ით მეტი">+</button></div>
-          <output id="calcOut"></output>
-          <button class="link" id="calcSet"></button>
-        </div>
-        <h3 class="sub mt">ცალობით</h3>
-        <div class="grid">${c.items.map(i => `
-          <article class="card">${pic(i)}
-            <div><h3 class="mt">${i.name}</h3><div class="desc">${i.desc}</div></div>
-            <div class="meta">${i.meta}</div>
-            <div class="buy"><div class="price">${gel(i.price)}</div><div data-slot="${i.id}">${control(i.id)}</div></div>
-          </article>`).join('')}
-        </div>
-      </section>`;
-    return `
-      <section class="cat" id="${c.id}">${head}
-        <div class="list">${c.items.map(i => `
-          <article class="row">${pic(i, 'sm')}
-            <div><h3 class="mt">${i.name}${i.tag ? `<span class="badge">${i.tag}</span>` : ''}</h3><div class="desc">${i.desc}</div><div class="meta">${i.meta}</div></div>
-            <div class="right"><div class="price">${gel(i.price)}</div><div data-slot="${i.id}">${control(i.id)}</div></div>
-          </article>`).join('')}
-        </div>
-      </section>`;
-  }).join('');
+  $('#menu').innerHTML = MENU.map(section).join('');
   calc();
 }
 
 // Suggest the closest set for the guest count
 function calc() {
   const g = Math.max(1, +$('#guests').value || 1);
-  const sets = MENU[0].sets;
-  const best = sets.reduce((a, s) => Math.abs(parseInt(s.meta) - g) < Math.abs(parseInt(a.meta) - g) ? s : a);
+  const best = MENU[0].items.reduce((a, s) => Math.abs(s.guests - g) < Math.abs(a.guests - g) ? s : a);
   $('#calcOut').innerHTML = `დაგჭირდება <b>${g * 6}-${g * 8}</b> ცალი, დაახლოებით <b>${gel(Math.round(g * 7 * PIECE_AVG))}</b>`;
   const b = $('#calcSet'); b.textContent = `${best.name} დაამატე`; b.dataset.set = best.id;
 }
@@ -499,21 +508,25 @@ function calc() {
 function refresh(id) {
   document.querySelectorAll(`[data-slot="${id}"]`).forEach(el => el.innerHTML = control(id));
   let count = 0, sum = 0;
-  cart.forEach((q, k) => { count += q; sum += q * byId[k].price; });
+  cart.forEach((q, k) => { count += 1; sum += q * byId[k].price; });
+  const left = Math.max(0, MIN_ORDER - sum);
   $('#count').textContent = count;
   $('#sum').textContent = $('#barSum').textContent = gel(sum);
-  $('#barCount').textContent = `${count} პოზიცია`;
+  $('#barCount').textContent = left ? `მინიმალურ შეკვეთამდე დარჩა ${gel(left)}` : `${count} პოზიცია`;
+  $('#minNote').textContent = left ? `მინიმალური შეკვეთა ${MIN_ORDER} ₾. დაამატე კიდევ ${gel(left)}.` : '';
   $('#cartbar').classList.toggle('on', count > 0);
-  $('#order').disabled = !count;
+  $('#order').disabled = !count || left > 0;
   $('#lines').innerHTML = count ? [...cart].map(([k, q]) => `
-    <div class="line"><div><div class="nm mt">${byId[k].name}</div><div class="sub2">${byId[k].meta} · ${gel(byId[k].price)}</div></div>
+    <div class="line"><div><div class="nm mt">${byId[k].name}</div><div class="sub2">${q} × ${gel(byId[k].price)}</div></div>
     <div class="lp">${gel(q * byId[k].price)}</div>${control(k)}</div>`).join('')
-    : '<div class="empty">კალათა ცარიელია. დაამატე სეტი ან კერძი მენიუდან.</div>';
+    : '<div class="empty">კალათა ცარიელია</div>';
 }
 
-function change(id, d) {
-  const q = (cart.get(id) || 0) + d;
-  q > 0 ? cart.set(id, q) : cart.delete(id);
+// Pieces start at the minimum and move in steps; going below the minimum removes the item
+function change(id, dir) {
+  const it = byId[id], q = cart.get(id) || 0;
+  const next = dir > 0 ? (q ? q + it.step : it.min) : (q - it.step < it.min ? 0 : q - it.step);
+  next ? cart.set(id, next) : cart.delete(id);
   refresh(id);
 }
 
@@ -527,7 +540,7 @@ document.addEventListener('click', e => {
   if (b) { const first = !cart.has(b.dataset.id); change(b.dataset.id, +b.dataset.d); if (first) toast(`${byId[b.dataset.id].name} დაემატა`); return; }
   const g = e.target.closest('[data-g]');
   if (g) { const inp = $('#guests'); inp.value = Math.max(1, (+inp.value || 0) + +g.dataset.g); calc(); return; }
-  if (e.target.id === 'calcSet') { const id = e.target.dataset.set; change(id, 1); toast(`${byId[id].name} დაემატა`); return; }
+  if (e.target.id === 'calcSet') { const id = e.target.dataset.set; if (!cart.has(id)) change(id, 1); toast(`${byId[id].name} დაემატა`); return; }
   const t = e.target.closest('[data-go]');
   if (t) document.getElementById(t.dataset.go).scrollIntoView();
 });
@@ -540,7 +553,7 @@ $('#orderForm').addEventListener('submit', e => e.preventDefault());
 $('#order').onclick = () => {
   if (!$('#fName').value.trim() || !$('#fPhone').value.trim()) { toast('შეავსე სახელი და ტელეფონი'); return; }
   const ids = [...cart.keys()]; cart.clear(); ids.forEach(refresh);
-  open(false); toast('მადლობა! შეკვეთა მიღებულია (სატესტო)');
+  open(false); toast('მადლობა! შეკვეთა მიღებულია');
 };
 
 // Highlight the tab of the section in view and keep it visible in the strip
@@ -555,7 +568,6 @@ const io = new IntersectionObserver(es => es.forEach(en => {
 
 render();
 refresh('_');
-// Mtavruli: CSS uppercase leaves Georgian unchanged, so map ა-ჰ (U+10D0..10FA, 10FD..10FF) to Ⴀ-Ⴟ (U+1C90..)
 document.querySelectorAll('section.cat').forEach(s => io.observe(s));
 </script>
 
