@@ -57,23 +57,31 @@
   .tab:hover { color: var(--ink); }
   .tab[aria-current="true"] { color: var(--ink); border-color: var(--ink); }
 
-  /* ---------- Hero ---------- */
-  .hero { background: var(--ink); color: var(--paper); }
-  .hero-in { padding-block: 56px; display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 40px; align-items: center; }
-  .eyebrow { font-size: 12px; color: var(--on-ink-muted); }
-  .hero h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(28px, 4.2vw, 46px); line-height: 1.2; margin: 14px 0 16px; text-wrap: balance; }
-  .hero p { font-weight: 300; color: var(--on-ink-muted); max-width: 52ch; }
-  .cta { margin-top: 26px; display: flex; gap: 12px; flex-wrap: wrap; }
+  /* ---------- Hero: Pirosmani feast behind the logo's double frame ---------- */
+  .hero { background: var(--ink); color: var(--paper); position: relative; overflow: hidden; isolation: isolate; }
+  .hero-bg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 60% 40%; z-index: -2; filter: saturate(.85) contrast(1.05); animation: drift 24s ease-in-out infinite alternate; }
+  .hero::before { content: ''; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(11,11,11,.94) 0%, rgba(11,11,11,.82) 38%, rgba(11,11,11,.35) 72%, rgba(11,11,11,.15) 100%), linear-gradient(0deg, rgba(11,11,11,.85) 0%, rgba(11,11,11,0) 40%); }
+  .hero-frame { position: absolute; inset: 18px; border: 1px solid rgba(255,255,255,.7); pointer-events: none; }
+  .hero-frame::after { content: ''; position: absolute; inset: 5px; border: .6px solid rgba(255,255,255,.45); }
+  .hero-in { min-height: min(640px, 82vh); padding-block: 96px 40px; display: flex; flex-direction: column; justify-content: space-between; gap: 48px; }
+  .hero-copy { max-width: 760px; }
+  .eyebrow { font-size: 12px; color: var(--on-ink-muted); display: flex; align-items: center; gap: 14px; }
+  .eyebrow::before { content: ''; width: 40px; height: 1px; background: currentColor; }
+  .hero h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(30px, 4.6vw, 56px); line-height: 1.12; margin: 20px 0 18px; text-wrap: balance; }
+  .hero p { font-weight: 300; color: rgba(255,255,255,.78); max-width: 50ch; }
+  .cta { margin-top: 30px; display: flex; gap: 12px; flex-wrap: wrap; }
   .btn { border: 1px solid var(--paper); background: var(--paper); color: var(--ink); padding: 13px 22px; font-size: 14px; font-weight: 500; text-decoration: none; }
   .btn.ghost { background: transparent; color: var(--paper); }
   .btn:hover { background: transparent; color: var(--paper); }
   .btn.ghost:hover { background: var(--paper); color: var(--ink); }
-  .frame { border: 1px solid var(--paper); padding: 5px; }
-  .frame-in { border: .6px solid var(--paper); padding: 8px 28px; }
-  .stat { display: flex; justify-content: space-between; align-items: center; gap: 16px; padding-block: 18px; border-bottom: 1px solid var(--on-ink-line); }
-  .stat:last-child { border: 0; }
+  .hero-foot { display: flex; justify-content: space-between; align-items: flex-end; gap: 24px; flex-wrap: wrap; }
+  .stats { display: flex; border-top: 1px solid rgba(255,255,255,.35); }
+  .stat { padding: 16px 32px 0 0; margin-right: 32px; border-right: 1px solid rgba(255,255,255,.2); display: grid; gap: 6px; }
+  .stat:last-child { border: 0; margin: 0; padding-right: 0; }
   .stat b { font: 400 34px/1 var(--latin); font-variant-numeric: tabular-nums; }
-  .stat span { font-size: 13px; color: var(--on-ink-muted); text-align: right; }
+  .stat span { font-size: 12px; color: var(--on-ink-muted); }
+  .painting { font-size: 11px; color: rgba(255,255,255,.6); text-align: right; }
+  @keyframes drift { from { transform: scale(1.04) translateX(0); } to { transform: scale(1.1) translateX(-2%); } }
 
   /* ---------- Sections ---------- */
   main { padding-block: 8px 120px; }
@@ -207,7 +215,12 @@
     .logo b { top: 17px; font-size: 13px; }
     .logo i { top: 33px; right: 10px; font-size: 4.8px; }
     .tabs { gap: 22px; }
-    .hero-in { grid-template-columns: 1fr; padding-block: 40px; gap: 28px; }
+    .hero-in { min-height: 0; padding-block: 64px 36px; }
+    .hero-frame { inset: 10px; }
+    .hero::before { background: linear-gradient(0deg, rgba(11,11,11,.95) 0%, rgba(11,11,11,.8) 55%, rgba(11,11,11,.55) 100%); }
+    .stat { padding-right: 16px; margin-right: 16px; }
+    .stat b { font-size: 26px; }
+    .painting { text-align: left; }
     .list { grid-template-columns: 1fr; }
     .sets { grid-template-columns: 1fr; }
     .grid { grid-template-columns: 1fr 1fr; gap: 20px 14px; }
@@ -218,7 +231,7 @@
     .row { grid-template-columns: 64px minmax(0, 1fr) auto; gap: 14px; }
     .row .pic { width: 64px; }
   }
-  @media (prefers-reduced-motion: reduce) { * { transition: none !important; scroll-behavior: auto !important; } }
+  @media (prefers-reduced-motion: reduce) { * { transition: none !important; animation: none !important; scroll-behavior: auto !important; } }
 </style>
 </head>
 <body>
@@ -281,9 +294,11 @@
 </header>
 
 <section class="hero" id="top">
+  <img class="hero-bg" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pirosmani._Family_party.jpg?width=1800" alt="" referrerpolicy="no-referrer" onerror="this.remove(); document.querySelector('.painting')?.remove()">
+  <div class="hero-frame" aria-hidden="true"></div>
   <div class="wrap hero-in">
-    <div>
-      <div class="eyebrow mt">ქართული სამზარეულო</div>
+    <div class="hero-copy">
+      <div class="eyebrow mt">ქართული სამზარეულო · Since 2026</div>
       <h1 class="mt">ქართული სუფრა ფურშეტის ფორმატში</h1>
       <p>მინი ხაჭაპურები, ფხალეული, მწვადი შამფურზე და ჩურჩხელა. შეუკვეთე ცალობით ან მზა სეტით ოფისისთვის, დაბადების დღისთვის ან დიდი ღონისძიებისთვის.</p>
       <div class="cta">
@@ -291,11 +306,14 @@
         <a class="btn ghost" href="#khachapuri">სრული მენიუ</a>
       </div>
     </div>
-    <div class="frame"><div class="frame-in">
-      <div class="stat"><b>10-200</b><span>სტუმარი ერთ შეკვეთაზე</span></div>
-      <div class="stat"><b>6-8</b><span>ცალი ერთ სტუმარზე</span></div>
-      <div class="stat"><b>24 სთ</b><span>წინასწარი შეკვეთა</span></div>
-    </div></div>
+    <div class="hero-foot">
+      <div class="stats">
+        <div class="stat"><b>10-200</b><span>სტუმარი ერთ შეკვეთაზე</span></div>
+        <div class="stat"><b>6-8</b><span>ცალი ერთ სტუმარზე</span></div>
+        <div class="stat"><b>24 სთ</b><span>წინასწარი შეკვეთა</span></div>
+      </div>
+      <div class="painting">ნიკო ფიროსმანი, „ოჯახური ქეიფი“</div>
+    </div>
   </div>
 </section>
 
