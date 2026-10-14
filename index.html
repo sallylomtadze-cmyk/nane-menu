@@ -122,7 +122,8 @@
   .card { display: flex; flex-direction: column; gap: 12px; }
   .pic { background: var(--ink); aspect-ratio: 1; position: relative; display: grid; place-items: center; color: var(--paper); max-width: 100%; overflow: hidden; }
   .pic::after { content: ''; position: absolute; inset: 6px; border: 1px solid rgba(255,255,255,.45); pointer-events: none; }
-  .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .pic img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; background: var(--ink); }
+  .pic::after { z-index: 1; }
   .pic svg { width: 58%; stroke: currentColor; fill: none; stroke-width: 1.3; stroke-linecap: round; stroke-linejoin: round; }
   .badge { position: absolute; top: 12px; left: 12px; background: var(--paper); color: var(--ink); font-size: 10px; font-weight: 600; padding: 3px 7px; z-index: 1; }
   .card h3 { font-family: var(--serif); font-weight: 500; font-size: 15px; line-height: 1.3; }
@@ -194,6 +195,8 @@
   footer { background: var(--ink); color: var(--paper); }
   .foot { padding-block: 44px; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; font-size: 13px; font-weight: 300; color: var(--on-ink-muted); }
   .foot h4 { color: var(--paper); font-family: var(--serif); font-weight: 500; font-size: 13px; margin-bottom: 8px; }
+  .credit { grid-column: 1 / -1; font-size: 11px; color: var(--on-ink-muted); }
+  .credit a { color: inherit; }
   .foot .nane { color: var(--paper); font: 400 26px/1 var(--latin); letter-spacing: 2px; margin-bottom: 6px; }
 
   @media (max-width: 1080px) { .grid { grid-template-columns: repeat(3, minmax(0, 1fr)); } .sets { grid-template-columns: 1fr 1fr; } }
@@ -304,6 +307,7 @@
     <div><h4 class="mt">მისამართი</h4>თბილისი</div>
     <div><h4 class="mt">სამუშაო საათები</h4>ყოველდღე 09:00-დან 22:00-მდე</div>
     <div><h4 class="mt">კონტაქტი</h4>+995 5XX XX XX XX<br>order@nane.ge</div>
+    <p class="credit">ფოტოები: <a href="https://commons.wikimedia.org/wiki/Category:Cuisine_of_Georgia_(country)" target="_blank" rel="noopener">Wikimedia Commons</a>, ავტორების CC BY / CC BY-SA ლიცენზიით. სატესტო ვერსია.</p>
   </div>
 </footer>
 
@@ -345,65 +349,65 @@ const MENU = [
         items: ['პენოვანი მინი|30', 'ლობიანი მინი|15', 'ყველის კანაპე|20', 'ფელამუში ჭიქაში|15', 'ნაზუქი|10'] },
     ],
     items: [
-      { id: 'f1', name: 'მინი აჭარული ხაჭაპური', desc: 'სულგუნი, იმერული ყველი, მწყერის კვერცხი', meta: '1 ცალი · 60 გ', price: 4.5, icon: 'f1', tag: 'ჰიტი' },
-      { id: 'f2', name: 'მინი იმერული ხაჭაპური', desc: 'იმერული ყველი, საფუვრიანი ცომი', meta: '1 ცალი · 50 გ', price: 3, icon: 'f2' },
-      { id: 'f3', name: 'მინი მეგრული', desc: 'ორმაგი სულგუნი ზემოდან', meta: '1 ცალი · 55 გ', price: 3.5, icon: 'f3' },
-      { id: 'f4', name: 'ბადრიჯანი ნიგვზით', desc: 'რულეტი, ნიგვზის პასტა, ბროწეული', meta: '1 ცალი · 40 გ', price: 3, icon: 'f4' },
-      { id: 'f5', name: 'ფხალი ტარტალეტში', desc: 'ისპანახი, ჭარხალი, ნიგვზი', meta: '1 ცალი · 35 გ', price: 3, icon: 'f5' },
-      { id: 'f6', name: 'მწვადი შამფურზე', desc: 'ღორის კისერი, ხახვი, ტყემალი', meta: '1 ცალი · 50 გ', price: 5, icon: 'f6' },
-      { id: 'f7', name: 'სულგუნის კანაპე', desc: 'სულგუნი, ჩერი პომიდორი, რეჰანი', meta: '1 ცალი · 30 გ', price: 2.5, icon: 'f7' },
-      { id: 'f8', name: 'საცივი ტარტალეტში', desc: 'ქათამი, ნიგვზის სოუსი', meta: '1 ცალი · 40 გ', price: 4, icon: 'f8' },
-      { id: 'f9', name: 'მინი ლობიანი', desc: 'რაჭული, ლორით ან უხორცო', meta: '1 ცალი · 50 გ', price: 2.8, icon: 'f9' },
-      { id: 'f10', name: 'მინი ჩურჩხელა', desc: 'ყურძნის თათარა, ნიგოზი', meta: '1 ცალი · 25 გ', price: 2, icon: 'f10' },
+      { id: 'f1', name: 'მინი აჭარული ხაჭაპური', desc: 'სულგუნი, იმერული ყველი, მწყერის კვერცხი', meta: '1 ცალი · 60 გ', price: 4.5, icon: 'f1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Adjaruli_Khachapuri_%2848%29.jpg?width=640', tag: 'ჰიტი' },
+      { id: 'f2', name: 'მინი იმერული ხაჭაპური', desc: 'იმერული ყველი, საფუვრიანი ცომი', meta: '1 ცალი · 50 გ', price: 3, icon: 'f2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Georgian_Khachapuri_cheese_bread.jpg?width=640' },
+      { id: 'f3', name: 'მინი მეგრული', desc: 'ორმაგი სულგუნი ზემოდან', meta: '1 ცალი · 55 გ', price: 3.5, icon: 'f3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Megruli_Chatschapuri.jpg?width=640' },
+      { id: 'f4', name: 'ბადრიჯანი ნიგვზით', desc: 'რულეტი, ნიგვზის პასტა, ბროწეული', meta: '1 ცალი · 40 გ', price: 3, icon: 'f4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Badrijani_%28cropped%29.jpg?width=640' },
+      { id: 'f5', name: 'ფხალი ტარტალეტში', desc: 'ისპანახი, ჭარხალი, ნიგვზი', meta: '1 ცალი · 35 გ', price: 3, icon: 'f5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Spinach_pkhali.jpg?width=640' },
+      { id: 'f6', name: 'მწვადი შამფურზე', desc: 'ღორის კისერი, ხახვი, ტყემალი', meta: '1 ცალი · 50 გ', price: 5, icon: 'f6', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Mtsvadi.jpg?width=640' },
+      { id: 'f7', name: 'სულგუნის კანაპე', desc: 'სულგუნი, ჩერი პომიდორი, რეჰანი', meta: '1 ცალი · 30 გ', price: 2.5, icon: 'f7', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sulguni_Georgian_cheese.jpg?width=640' },
+      { id: 'f8', name: 'საცივი ტარტალეტში', desc: 'ქათამი, ნიგვზის სოუსი', meta: '1 ცალი · 40 გ', price: 4, icon: 'f8', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Satsivi_%282%29.jpg?width=640' },
+      { id: 'f9', name: 'მინი ლობიანი', desc: 'რაჭული, ლორით ან უხორცო', meta: '1 ცალი · 50 გ', price: 2.8, icon: 'f9', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lobiani_-_bean-filled_bread.jpg?width=640' },
+      { id: 'f10', name: 'მინი ჩურჩხელა', desc: 'ყურძნის თათარა, ნიგოზი', meta: '1 ცალი · 25 გ', price: 2, icon: 'f10', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Churchkhela_%284%29.jpg?width=640' },
     ] },
   { id: 'khachapuri', name: 'ხაჭაპური და ცომეული', note: 'ცხვება შეკვეთისას. მთლიანი ზომა 2-4 ადამიანზე.',
     items: [
-      { id: 'k1', name: 'აჭარული ხაჭაპური', desc: 'ნავის ფორმა, კარაქი, კვერცხი', meta: '450 გ', price: 20, icon: 'k1', tag: 'ჰიტი' },
-      { id: 'k2', name: 'იმერული ხაჭაპური', desc: 'კლასიკური, იმერული ყველი', meta: '600 გ · 8 ნაჭერი', price: 18, icon: 'k2' },
-      { id: 'k3', name: 'მეგრული ხაჭაპური', desc: 'სულგუნი შიგნით და ზემოდან', meta: '700 გ · 8 ნაჭერი', price: 22, icon: 'k3' },
-      { id: 'k4', name: 'პენოვანი', desc: 'ფენოვანი ცომი, იმერული ყველი', meta: '1 ცალი · 180 გ', price: 6, icon: 'k4' },
-      { id: 'k5', name: 'რაჭული ლობიანი', desc: 'ლობიო, ლორი, ხახვი', meta: '600 გ', price: 16, icon: 'k5' },
-      { id: 'k6', name: 'ხაბიზგინა', desc: 'ოსური, ყველი და კარტოფილი', meta: '600 გ', price: 18, icon: 'k6' },
-      { id: 'k7', name: 'კუბდარი', desc: 'სვანური, ხორცი და სვანური მარილი', meta: '650 გ', price: 24, icon: 'k7' },
-      { id: 'k8', name: 'შოთი პური', desc: 'თონის პური', meta: '1 ცალი', price: 2, icon: 'k8' },
+      { id: 'k1', name: 'აჭარული ხაჭაპური', desc: 'ნავის ფორმა, კარაქი, კვერცხი', meta: '450 გ', price: 20, icon: 'k1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Adjaruli_Khachapuri.jpg?width=640', tag: 'ჰიტი' },
+      { id: 'k2', name: 'იმერული ხაჭაპური', desc: 'კლასიკური, იმერული ყველი', meta: '600 გ · 8 ნაჭერი', price: 18, icon: 'k2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Khachapuri.jpg?width=640' },
+      { id: 'k3', name: 'მეგრული ხაჭაპური', desc: 'სულგუნი შიგნით და ზემოდან', meta: '700 გ · 8 ნაჭერი', price: 22, icon: 'k3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Megruli_Chatschapuri.jpg?width=640' },
+      { id: 'k4', name: 'პენოვანი', desc: 'ფენოვანი ცომი, იმერული ყველი', meta: '1 ცალი · 180 გ', price: 6, icon: 'k4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Old_Tbilisi%2C_Georgian_khachapuri%2C_Georgia.jpg?width=640' },
+      { id: 'k5', name: 'რაჭული ლობიანი', desc: 'ლობიო, ლორი, ხახვი', meta: '600 გ', price: 16, icon: 'k5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lobiani%2C_Restaurant_Aragvi.jpg?width=640' },
+      { id: 'k6', name: 'ხაბიზგინა', desc: 'ოსური, ყველი და კარტოფილი', meta: '600 გ', price: 18, icon: 'k6', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ossetian_cheese_pie_%28khabizgin%29.jpg?width=640' },
+      { id: 'k7', name: 'კუბდარი', desc: 'სვანური, ხორცი და სვანური მარილი', meta: '650 გ', price: 24, icon: 'k7', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Kubdari.jpg?width=640' },
+      { id: 'k8', name: 'შოთი პური', desc: 'თონის პური', meta: '1 ცალი', price: 2, icon: 'k8', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Shoti_gorgian_bread.jpg?width=640' },
     ] },
   { id: 'hot', name: 'ცხელი კერძები',
     note: 'მიეწოდება თერმოკონტეინერებით.',
     items: [
-      { id: 'h1', name: 'ხინკალი ქალაქური', desc: 'ღორის და საქონლის ხორცი, მწვანილი', meta: '10 ცალი', price: 15, icon: 'h1', tag: 'ჰიტი' },
-      { id: 'h2', name: 'ხინკალი სოკოთი', desc: 'სოკო, ხახვი, კარაქი', meta: '10 ცალი', price: 15, icon: 'h2' },
-      { id: 'h3', name: 'მწვადი ღორის', desc: 'ხახვი, ტყემალი, ლავაში', meta: '350 გ', price: 26, icon: 'h3' },
-      { id: 'h4', name: 'შქმერული', desc: 'ქათამი რძე-ნივრის სოუსში, კეცზე', meta: '500 გ', price: 30, icon: 'h4' },
-      { id: 'h5', name: 'ოჯახური', desc: 'ღორის ხორცი, შემწვარი კარტოფილი', meta: '450 გ', price: 24, icon: 'h5' },
-      { id: 'h6', name: 'ჩაქაფული', desc: 'ხბოს ხორცი, ტყემალი, ტარხუნა', meta: '450 გ', price: 28, icon: 'h6' },
-      { id: 'h7', name: 'ჩახოხბილი', desc: 'ქათამი, პომიდორი, მწვანილი', meta: '450 გ', price: 22, icon: 'h7' },
-      { id: 'h8', name: 'ლობიო ქოთანში', desc: 'მჭადით და მჟავეულით', meta: '400 გ', price: 14, icon: 'h8' },
+      { id: 'h1', name: 'ხინკალი ქალაქური', desc: 'ღორის და საქონლის ხორცი, მწვანილი', meta: '10 ცალი', price: 15, icon: 'h1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Khinkali.jpg?width=640', tag: 'ჰიტი' },
+      { id: 'h2', name: 'ხინკალი სოკოთი', desc: 'სოკო, ხახვი, კარაქი', meta: '10 ცალი', price: 15, icon: 'h2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Khinkali_%285%29.jpg?width=640' },
+      { id: 'h3', name: 'მწვადი ღორის', desc: 'ხახვი, ტყემალი, ლავაში', meta: '350 გ', price: 26, icon: 'h3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ghoris_Mtsvadi_%28%E1%83%A6%E1%83%9D%E1%83%A0%E1%83%98%E1%83%A1_%E1%83%9B%E1%83%AC%E1%83%95%E1%83%90%E1%83%93%E1%83%98%29.JPG?width=640' },
+      { id: 'h4', name: 'შქმერული', desc: 'ქათამი რძე-ნივრის სოუსში, კეცზე', meta: '500 გ', price: 30, icon: 'h4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Shkmeruli.jpg?width=640' },
+      { id: 'h5', name: 'ოჯახური', desc: 'ღორის ხორცი, შემწვარი კარტოფილი', meta: '450 გ', price: 24, icon: 'h5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Ojakhuri.JPG?width=640' },
+      { id: 'h6', name: 'ჩაქაფული', desc: 'ხბოს ხორცი, ტყემალი, ტარხუნა', meta: '450 გ', price: 28, icon: 'h6', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Chakapuli.jpg?width=640' },
+      { id: 'h7', name: 'ჩახოხბილი', desc: 'ქათამი, პომიდორი, მწვანილი', meta: '450 გ', price: 22, icon: 'h7', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Chakhokhbili_Closeup.jpg?width=640' },
+      { id: 'h8', name: 'ლობიო ქოთანში', desc: 'მჭადით და მჟავეულით', meta: '400 გ', price: 14, icon: 'h8', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Lobio_with_summer_savory_and_ajika.jpg?width=640' },
     ] },
   { id: 'cold', name: 'სალათები და ცივი კერძები',
     items: [
-      { id: 'c1', name: 'ქართული სალათი ნიგვზით', desc: 'კიტრი, პომიდორი, კახური ზეთი', meta: '350 გ', price: 15, icon: 'c1' },
-      { id: 'c2', name: 'ფხალეულის ასორტი', desc: 'ისპანახი, ჭარხალი, ჯონჯოლი, ბადრიჯანი', meta: '400 გ', price: 22, icon: 'c2' },
-      { id: 'c3', name: 'ბადრიჯანი ნიგვზით', desc: '8 რულეტი, ბროწეული', meta: '320 გ', price: 18, icon: 'c3' },
-      { id: 'c4', name: 'საცივი', desc: 'ინდაური ნიგვზის სოუსში', meta: '400 გ', price: 28, icon: 'c4' },
-      { id: 'c5', name: 'ქართული ყველის დაფა', desc: 'სულგუნი, იმერული, გუდა, ნადუღი', meta: '500 გ', price: 34, icon: 'c5' },
-      { id: 'c6', name: 'მჟავეულის ასორტი', desc: 'ჯონჯოლი, მწნილი, ჯანჯაფილი', meta: '400 გ', price: 14, icon: 'c6' },
+      { id: 'c1', name: 'ქართული სალათი ნიგვზით', desc: 'კიტრი, პომიდორი, კახური ზეთი', meta: '350 გ', price: 15, icon: 'c1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tomato_cucumber_salad.jpg?width=640' },
+      { id: 'c2', name: 'ფხალეულის ასორტი', desc: 'ისპანახი, ჭარხალი, ჯონჯოლი, ბადრიჯანი', meta: '400 გ', price: 22, icon: 'c2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pkhali%2C_Badrijani_and_Ajika.jpg?width=640' },
+      { id: 'c3', name: 'ბადრიჯანი ნიგვზით', desc: '8 რულეტი, ბროწეული', meta: '320 გ', price: 18, icon: 'c3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Badrijani_%28cropped%29.jpg?width=640' },
+      { id: 'c4', name: 'საცივი', desc: 'ინდაური ნიგვზის სოუსში', meta: '400 გ', price: 28, icon: 'c4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Satsivi_%282%29.jpg?width=640' },
+      { id: 'c5', name: 'ქართული ყველის დაფა', desc: 'სულგუნი, იმერული, გუდა, ნადუღი', meta: '500 გ', price: 34, icon: 'c5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Sulguni.jpg?width=640' },
+      { id: 'c6', name: 'მჟავეულის ასორტი', desc: 'ჯონჯოლი, მწნილი, ჯანჯაფილი', meta: '400 გ', price: 14, icon: 'c6', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Jonjoli_bladdernut_flower_pickles.jpg?width=640' },
     ] },
   { id: 'dessert', name: 'დესერტი',
     items: [
-      { id: 'd1', name: 'ჩურჩხელა კახური', desc: 'ნიგოზი, ყურძნის თათარა', meta: '1 ცალი · 120 გ', price: 6, icon: 'd1' },
-      { id: 'd2', name: 'გოზინაყი', desc: 'ნიგოზი და თაფლი', meta: '200 გ', price: 12, icon: 'd2' },
-      { id: 'd3', name: 'ფელამუში', desc: 'ყურძნის წვენი, ნიგოზი', meta: '1 ჭიქა', price: 7, icon: 'd3' },
-      { id: 'd4', name: 'ნაზუქი', desc: 'ტკბილი პური, დარიჩინი', meta: '1 ცალი', price: 5, icon: 'd4' },
-      { id: 'd5', name: 'თაფლის ნამცხვარი', desc: '„მედოკი“, არაჟნის კრემი', meta: '1 ნაჭერი', price: 8, icon: 'd5' },
+      { id: 'd1', name: 'ჩურჩხელა კახური', desc: 'ნიგოზი, ყურძნის თათარა', meta: '1 ცალი · 120 გ', price: 6, icon: 'd1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Churchkhela.jpg?width=640' },
+      { id: 'd2', name: 'გოზინაყი', desc: 'ნიგოზი და თაფლი', meta: '200 გ', price: 12, icon: 'd2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Gozinaki_with_hazelnuts.jpg?width=640' },
+      { id: 'd3', name: 'ფელამუში', desc: 'ყურძნის წვენი, ნიგოზი', meta: '1 ჭიქა', price: 7, icon: 'd3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Pelamushi.jpg?width=640' },
+      { id: 'd4', name: 'ნაზუქი', desc: 'ტკბილი პური, დარიჩინი', meta: '1 ცალი', price: 5, icon: 'd4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Traditional_georgian_bread_%28tonis_puri%29.jpg?width=640' },
+      { id: 'd5', name: 'თაფლის ნამცხვარი', desc: '„მედოკი“, არაჟნის კრემი', meta: '1 ნაჭერი', price: 8, icon: 'd5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Medovik.jpg?width=640' },
     ] },
   { id: 'drinks', name: 'სასმელი',
     items: [
-      { id: 'w1', name: 'საფერავი', desc: 'მშრალი წითელი, კახეთი', meta: '0.75 ლ', price: 45, icon: 'w1' },
-      { id: 'w2', name: 'რქაწითელი ქვევრის', desc: 'ქარვისფერი, მშრალი', meta: '0.75 ლ', price: 48, icon: 'w2' },
-      { id: 'w3', name: 'ქინძმარაული', desc: 'ნახევრად ტკბილი წითელი', meta: '0.75 ლ', price: 42, icon: 'w3' },
-      { id: 'w4', name: 'ლიმონათი', desc: 'ტარხუნა, მსხალი, ნაღები', meta: '0.5 ლ', price: 4, icon: 'w4' },
-      { id: 'w5', name: 'ბორჯომი', desc: 'მინერალური წყალი', meta: '0.5 ლ', price: 3.5, icon: 'w5' },
-      { id: 'w6', name: 'ჭაჭა', desc: 'ყურძნის არაყი', meta: '0.5 ლ', price: 38, icon: 'w6' },
+      { id: 'w1', name: 'საფერავი', desc: 'მშრალი წითელი, კახეთი', meta: '0.75 ლ', price: 45, icon: 'w1', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Wine_bottle_of_Saperavi.jpg?width=640' },
+      { id: 'w2', name: 'რქაწითელი ქვევრის', desc: 'ქარვისფერი, მშრალი', meta: '0.75 ლ', price: 48, icon: 'w2', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Qvevri_Mesashunawines.jpg?width=640' },
+      { id: 'w3', name: 'ქინძმარაული', desc: 'ნახევრად ტკბილი წითელი', meta: '0.75 ლ', price: 42, icon: 'w3', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Saperavi.jpg?width=640' },
+      { id: 'w4', name: 'ლიმონათი', desc: 'ტარხუნა, მსხალი, ნაღები', meta: '0.5 ლ', price: 4, icon: 'w4', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Tbilisi%2C_Lagidze_lemonade%2C_Georgia.jpg?width=640' },
+      { id: 'w5', name: 'ბორჯომი', desc: 'მინერალური წყალი', meta: '0.5 ლ', price: 3.5, icon: 'w5', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/0.5_GL_Borjomi_Glass_Bottle.jpg?width=640' },
+      { id: 'w6', name: 'ჭაჭა', desc: 'ყურძნის არაყი', meta: '0.5 ლ', price: 38, icon: 'w6', img: 'https://commons.wikimedia.org/wiki/Special:FilePath/Chacha.jpg?width=640' },
     ] },
 ];
 
@@ -419,7 +423,8 @@ function control(id) {
   return q ? `<div class="qty"><button data-d="-1" data-id="${id}" aria-label="ერთით ნაკლები">−</button><span>${q}</span><button data-d="1" data-id="${id}" aria-label="ერთით მეტი">+</button></div>`
            : `<button class="add" data-d="1" data-id="${id}">დამატება</button>`;
 }
-const pic = (i, cls = '') => `<div class="pic ${cls}">${i.img ? `<img src="${i.img}" alt="${i.name}" loading="lazy">` : `<svg viewBox="0 0 100 70" aria-hidden="true"><use href="#i-${i.icon}"/></svg>`}${cls ? '' : (i.tag ? `<span class="badge">${i.tag}</span>` : '')}</div>`;
+// Real photo when it loads; the dish icon stays underneath as a fallback
+const pic = (i, cls = '') => `<div class="pic ${cls}"><svg viewBox="0 0 100 70" aria-hidden="true"><use href="#i-${i.icon}"/></svg>${i.img ? `<img src="${i.img}" alt="${i.name}" loading="lazy" referrerpolicy="no-referrer" onerror="this.remove()">` : ''}${cls ? '' : (i.tag ? `<span class="badge">${i.tag}</span>` : '')}</div>`;
 
 function render() {
   $('#tabs').innerHTML = MENU.map((c, i) => `<button class="tab mt" data-go="${c.id}" aria-current="${i === 0}">${c.name}</button>`).join('');
